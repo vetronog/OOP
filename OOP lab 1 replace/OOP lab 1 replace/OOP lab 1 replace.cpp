@@ -1,4 +1,4 @@
-// OOP lab 1 replace.cpp : Defines the entry point for the console application.
+ï»¿// OOP lab 1 replace.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -8,20 +8,43 @@
 
 using namespace std;
 
+void FindAndReplace(ifstream &fileOfInput, ofstream &fileOfOutput, const string & searchString, const string & replaceString)
+{
+	size_t currentPosition = 0;
+	size_t searchStringPosition = 0;
+	string line;
+	while (getline(fileOfInput, line))
+	{
+		currentPosition = 0;
+		searchStringPosition = line.find(searchString, currentPosition);
+		while (searchStringPosition != string::npos) 
+		{
+			line.replace(searchStringPosition, searchString.length(), replaceString);
+			currentPosition = searchStringPosition + replaceString.length();
+			searchStringPosition = line.find(searchString, currentPosition);
+		}
+		fileOfOutput << line << "\n";
+	}
+}
 int main(int argc, char* argv[])
 {
 	if (argc != 5)
 	{
 		cout << "Invalid arguments count\n"
-		   	 << "Usage: copyfile.exe <input file> <output file><text to find> <text to replace>\n";
+			<< "Usage: copyfile.exe <input file> <output file><text to find> <text to replace>\n";
 		return 1;
 	}
 	ifstream fileOfInput;
-	unsigned int currPosition = 0;
 	fileOfInput.open (argv[1]);
 	if (!fileOfInput.is_open()) 
 	{
 		cout << "Failed to open " << argv[1] << " for reading\n";
+		return 1;
+	}
+
+	if (fileOfInput.peek() == ifstream::traits_type::eof())
+	{
+		cout << "File " << argv[1] << " is empty!" << "\n";
 		return 1;
 	}
 
@@ -38,22 +61,11 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	size_t textPosition = 0;
-	std::string line;
-	while (std::getline(fileOfInput, line))
-	{
-		currPosition = 0;
-		textPosition = line.find(argv[3], currPosition);
-		while (textPosition != string::npos) 
-		{
-			line.replace(textPosition, std::string(argv[3]).length(), argv[4]);
-			currPosition = textPosition + std::string(argv[4]).length();
-			textPosition = line.find(argv[3], currPosition);
-		}
-		output << line << "\n";
-	}
+	string srtToReplace = argv[4];
 
-	if (!output.flush()) // Åñëè íå óäàëîñü ñáðîñèòü äàííûå íà äèñê
+	FindAndReplace(fileOfInput, output, strToSearch, srtToReplace);
+
+	if (!output.flush()) // Ã…Ã±Ã«Ã¨ Ã­Ã¥ Ã³Ã¤Ã Ã«Ã®Ã±Ã¼ Ã±Ã¡Ã°Ã®Ã±Ã¨Ã²Ã¼ Ã¤Ã Ã­Ã­Ã»Ã¥ Ã­Ã  Ã¤Ã¨Ã±Ãª
 	{
 		cout << "Failed to save data on disk\n";
 		return 1;
