@@ -25,7 +25,7 @@ void ReadMatrixFromFile(ifstream &input, Matrix &mainMatrix)
 	}
 };
 
-double DeterminantOfMainMatrix(Matrix  const&matrix)
+double DeterminantOfMainMatrix(Matrix  const&matrix)// РјРµС‚РѕРґ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°
 {
 	return  (matrix[0][0] * matrix[1][1] * matrix[2][2]
 			+ matrix[0][1] * matrix[1][2] * matrix[2][0] 
@@ -35,7 +35,7 @@ double DeterminantOfMainMatrix(Matrix  const&matrix)
 			- matrix[0][2] * matrix[1][1] * matrix[2][0]);
 };
 
-double DetermOfMinor(double a11, double a12, double a21, double a22)
+double DetermOfMinor(double a11, double a12, double a21, double a22) // РїРµСЂРµРјРЅРѕР¶РµРЅРёРµ РґРёР°РіРѕРЅР°Р»РµР№
 {
 	double determ = 0;
 	determ = (a11*a22) - (a12*a21);
@@ -61,11 +61,11 @@ double FindMinor(Matrix &matrix, const int &i, const int &j)
 	int index = 0;
 	for (int row = 0; row < MATRIX_ROW_NUM; ++row)
 	{
-		if (row != i)
+		if (row != i) // РїРѕРёСЃРє РїРѕ СЃС‚СЂРѕРєРµ
 		{
 			for (int column = 0; column < MATRIX_COL_NUM; ++column)
 			{
-				if (column != j)
+				if (column != j) // РїРѕРёСЃРє РїРѕ СЃС‚РѕР»Р±С†Сѓ
 				{
 					valueOfMinor[index] = matrix[row][column];
 					index++;
@@ -131,13 +131,13 @@ int main(int argc, char * argv[])
 	double determ = DeterminantOfMainMatrix(matrix);
 	if (determ == 0)
 	{
-		output << "Детерминант матрицы равен 0 -> Обратной матрицы не существует";
+		output << "Г„ГҐГІГҐГ°Г¬ГЁГ­Г Г­ГІ Г¬Г ГІГ°ГЁГ¶Г» Г°Г ГўГҐГ­ 0 -> ГЋГЎГ°Г ГІГ­Г®Г© Г¬Г ГІГ°ГЁГ¶Г» Г­ГҐ Г±ГіГ№ГҐГ±ГІГўГіГҐГІ";
 		return EXIT_FAILURE;
 	}
 	Matrix inverseMatrix;
 	InverseOfMatrix(matrix, inverseMatrix, determ);
 	PrintInvMatrix(inverseMatrix, output);
-	if (!output.flush()) // Если не удалось сбросить данные на диск
+	if (!output.flush()) // Г…Г±Г«ГЁ Г­ГҐ ГіГ¤Г Г«Г®Г±Гј Г±ГЎГ°Г®Г±ГЁГІГј Г¤Г Г­Г­Г»ГҐ Г­Г  Г¤ГЁГ±ГЄ
 	{
 		cout << "Failed to save data on disk\n";
 		return 1;
