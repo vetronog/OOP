@@ -80,7 +80,7 @@ double FindMinor(Matrix &matrix, const int &i, const int &j)
 bool IsNeedInverseSign(const int& columnNumber, const int & rowNumber)
 {
 	int Summ = columnNumber + rowNumber;
-	return ((Summ == 1) || (Summ == 3));
+	return ((Summ % 2 != 0) && (Summ != 0));
 }
 
 void InverseOfMatrix(Matrix &matrix, Matrix invMatrix, const double determ)
