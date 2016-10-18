@@ -1,10 +1,8 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
-#include "Vector.h"
+#include "ProcessVector.h"
 #include <algorithm>
 #include <numeric>
+#include <vector>
 #include <functional>
 #include <boost/range/algorithm/transform.hpp>
 #pragma warning (push, 3)
@@ -33,4 +31,6 @@ void ProcessVector(std::vector<double> & numbers)
 	auto sumOfPositives = accumulate(numbers.begin(), numbers.end(), 0.0, addIfPositive);
 
 	double avg = (numberOfPositives > 0) ? sumOfPositives / numberOfPositives : 0.0;
+
+	boost::transform(numbers, numbers.begin(), arg1 + avg);
 }
