@@ -8,10 +8,10 @@ bool VectorsAreEqual(vector<double> const& x, vector<double> const& y)
 	return x == y;
 }
 
-// Функция ProcessVector
+// Г”ГіГ­ГЄГ¶ГЁГї ProcessVector
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 
-// Создает пустой вектор из пустого вектора
+// Г‘Г®Г§Г¤Г ГҐГІ ГЇГіГ±ГІГ®Г© ГўГҐГЄГІГ®Г° ГЁГ§ ГЇГіГ±ГІГ®ГЈГ® ГўГҐГЄГІГ®Г°Г 
 BOOST_AUTO_TEST_CASE(makes_empty_vector_from_empty_vector)
 {
 	vector<double> emptyVector;
@@ -19,26 +19,26 @@ BOOST_AUTO_TEST_CASE(makes_empty_vector_from_empty_vector)
 	BOOST_CHECK(emptyVector.empty());
 }
 
-// не изменяет содержимое вектора, который не содержит положительных чисел
+// Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГҐГІ Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГўГҐГЄГІГ®Г°Г , ГЄГ®ГІГ®Г°Г»Г© Г­ГҐ Г±Г®Г¤ГҐГ°Г¦ГЁГІ ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г»Гµ Г·ГЁГ±ГҐГ«
 BOOST_AUTO_TEST_CASE(does_not_change_vector_containing_no_positive_numbers)
 {
 	vector<double> numbers = { -4, 0, -3 };
-	auto copy(numbers); // аналог vector<double> copy(numbers);
+	auto copy(numbers); // Г Г­Г Г«Г®ГЈ vector<double> copy(numbers);
 	ProcessVector(numbers);
 	BOOST_CHECK(numbers == copy);
 }
 
-// не изменяет содержимое вектора, который содержит проверенные числа
-BOOST_AUTO_TEST_CASE(does_not_change_vector_containing_references)
+// Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГҐГІ Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГўГҐГЄГІГ®Г°Г , ГЄГ®ГІГ®Г°Г»Г© Г±Г®Г¤ГҐГ°Г¦ГЁГІ ГЇГ°Г®ГўГҐГ°ГҐГ­Г­Г»ГҐ Г·ГЁГ±Г«Г 
+BOOST_AUTO_TEST_CASE(vector_containing_references)
 {
 	vector<double> numbers = { 1, 2, 3, 4, 5 };
 	ProcessVector(numbers);
 	BOOST_CHECK(VectorsAreEqual(numbers, {4, 5, 6, 7, 8}));
 }
 
-// при обработке вектора с одним положительным числом
+// ГЇГ°ГЁ Г®ГЎГ°Г ГЎГ®ГІГЄГҐ ГўГҐГЄГІГ®Г°Г  Г± Г®Г¤Г­ГЁГ¬ ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г»Г¬ Г·ГЁГ±Г«Г®Г¬
 BOOST_AUTO_TEST_SUITE(when_processing_a_vector_with_one_positive_number)
-// должна добавить это число ко всем элементам вектора
+// Г¤Г®Г«Г¦Г­Г  Г¤Г®ГЎГ ГўГЁГІГј ГЅГІГ® Г·ГЁГ±Г«Г® ГЄГ® ГўГ±ГҐГ¬ ГЅГ«ГҐГ¬ГҐГ­ГІГ Г¬ ГўГҐГЄГІГ®Г°Г 
 BOOST_AUTO_TEST_CASE(should_add_this_number_to_each_element)
 {
 	vector<double> numbers = { -1, 3.5 };
@@ -47,14 +47,14 @@ BOOST_AUTO_TEST_CASE(should_add_this_number_to_each_element)
 	BOOST_CHECK(VectorsAreEqual(numbers,
 	{ (-1 + 3.5), (3.5 + 3.5) }
 	));
-	// Аналогично следующей инструкции:
+	// ГЂГ­Г Г«Г®ГЈГЁГ·Г­Г® Г±Г«ГҐГ¤ГіГѕГ№ГҐГ© ГЁГ­Г±ГІГ°ГіГЄГ¶ГЁГЁ:
 	// BOOST_CHECK(numbers == vector<double>({ (-1 + 3.5), (3.5 + 3.5) }));
 }
 BOOST_AUTO_TEST_SUITE_END()
 
-// при обработке вектора с несколькими положительными элементами
+// ГЇГ°ГЁ Г®ГЎГ°Г ГЎГ®ГІГЄГҐ ГўГҐГЄГІГ®Г°Г  Г± Г­ГҐГ±ГЄГ®Г«ГјГЄГЁГ¬ГЁ ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г»Г¬ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІГ Г¬ГЁ
 BOOST_AUTO_TEST_SUITE(when_processing_a_vector_with_several_positive_elements)
-// должен добавить их среднее арифметическое к каждому элементу
+// Г¤Г®Г«Г¦ГҐГ­ Г¤Г®ГЎГ ГўГЁГІГј ГЁГµ Г±Г°ГҐГ¤Г­ГҐГҐ Г Г°ГЁГґГ¬ГҐГІГЁГ·ГҐГ±ГЄГ®ГҐ ГЄ ГЄГ Г¦Г¤Г®Г¬Гі ГЅГ«ГҐГ¬ГҐГ­ГІГі
 BOOST_AUTO_TEST_CASE(should_add_their_average_to_each_element)
 {
 	vector<double> numbers = { -1, 1, 2, 3 };
