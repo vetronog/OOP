@@ -3,7 +3,7 @@
 
 using namespace std;
 
-BOOST_AUTO_TEST_SUITE(ProcessVector_function)
+BOOST_AUTO_TEST_SUITE(ProcessFindAndReplace_function)
 
 BOOST_AUTO_TEST_CASE(make_first_test)
 {
