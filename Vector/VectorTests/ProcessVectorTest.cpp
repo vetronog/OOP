@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(does_not_change_vector_containing_no_positive_numbers)
 }
 
 // íå èçìåíÿåò ñîäåðæèìîå âåêòîðà, êîòîðûé ñîäåðæèò ïðîâåðåííûå ÷èñëà
-BOOST_AUTO_TEST_CASE(vector_containing_references)
+BOOST_AUTO_TEST_CASE(vector_containing_all_positive_number)
 {
 	vector<double> numbers = { 1, 2, 3, 4, 5 };
 	ProcessVector(numbers);
@@ -44,9 +44,7 @@ BOOST_AUTO_TEST_CASE(should_add_this_number_to_each_element)
 	vector<double> numbers = { -1, 3.5 };
 	ProcessVector(numbers);
 
-	BOOST_CHECK(VectorsAreEqual(numbers,
-	{ (-1 + 3.5), (3.5 + 3.5) }
-	));
+	BOOST_CHECK(VectorsAreEqual(numbers, { (-1 + 3.5), (3.5 + 3.5) }));
 	// Àíàëîãè÷íî ñëåäóþùåé èíñòðóêöèè:
 	// BOOST_CHECK(numbers == vector<double>({ (-1 + 3.5), (3.5 + 3.5) }));
 }
