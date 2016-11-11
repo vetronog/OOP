@@ -20,7 +20,8 @@ void ProcessVector(std::vector<double> & numbers)
 	auto IsPositive = [](double number)
 	{return number > 0; };
 	size_t numberOfPositives = 0;
-	auto addIfPositive = [&numberOfPositives](double acc, double current) {
+	auto addIfPositive = [&numberOfPositives](double acc, double current)
+	{
 		if (current > 0.0)
 		{
 			++numberOfPositives;
@@ -30,7 +31,14 @@ void ProcessVector(std::vector<double> & numbers)
 	};
 	auto sumOfPositives = accumulate(numbers.begin(), numbers.end(), 0.0, addIfPositive);
 
-	double avg = (numberOfPositives > 0) ? sumOfPositives / numberOfPositives : 0.0;
-
-	boost::transform(numbers, numbers.begin(), arg1 + avg);
+	if (!numbers.empty())
+	{
+		for (int i = 0; i <= numbers.size() - 1; i++)
+		{
+			if (i % 2 == 0)
+				numbers[i] = numbers[i] * 2;
+			else
+				numbers[i] -= sumOfPositives;
+		}
+	}
 }
