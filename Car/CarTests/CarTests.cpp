@@ -23,7 +23,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 		
 		BOOST_AUTO_TEST_CASE(can_set_neutral_gear)
 		{
-			BOOST_CHECK(car.SetGear(0));
+			BOOST_CHECK(!car.SetGear(0));
 		}
 		
 		BOOST_AUTO_TEST_CASE(cant_set_non_neutral_gear)
