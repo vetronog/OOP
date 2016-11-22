@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Const.h"
 
-typedef std::pair<unsigned, unsigned> Speed;
+typedef std::pair<int, int> Speed;
 typedef std::map<Gear, Speed> SpeedRange;
 extern const SpeedRange speedRange;
 
@@ -10,7 +10,7 @@ class CCar
 {
 public:
 	int GetGear() const;
-	unsigned GetCurrentSpeed() const;
+	int GetCurrentSpeed() const;
 	Direction GetDirection() const;
 	bool IsTurnOnEngine() const;
 	bool TurnOnEngine();
@@ -25,5 +25,5 @@ public:
 private:
 	bool m_isEngineOn = false;
 	Gear m_currentGear = Gear::NEUTRAL_GEAR;
-	unsigned m_speed = 0;
+	int m_speed = 0;
 };

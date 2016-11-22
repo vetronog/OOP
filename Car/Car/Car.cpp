@@ -22,9 +22,9 @@ int CCar::GetGear() const
 	return static_cast<int>(m_currentGear);
 }
 
-unsigned CCar::GetCurrentSpeed() const
+int CCar::GetCurrentSpeed() const
 {
-	return m_speed;
+	return std::abs(m_speed);
 }
 
 bool CCar::IsTurnOnEngine() const
