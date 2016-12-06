@@ -10,6 +10,9 @@ CRemoteControl::CRemoteControl(std::ifstream & input, std::ostream & output)
 	, m_output(output)
 	, m_actionMap({
 		{ "line", bind(&CRemoteControl::CreateLine, this, _1) },
+		{ "triangle", bind(&CRemoteControl::CreateTriangle, this, _1) },
+		{ "rectangle", bind(&CRemoteControl::CreateRectangle, this, _1) },
+		{ "circle", bind(&CRemoteControl::CreateCircle, this, _1) },
 })
 {
 }
@@ -18,6 +21,12 @@ void CRemoteControl::PrintInfo() const
 {
 	if (!m_shapes.empty())
 	{
+		m_output << "|SHAPES|\n";
+		for (auto const& shape : m_shapes)
+		{
+			m_output << ">" << shape->ToString() << "\n";
+
+		}
 
 		auto shapeWithMaxArea = std::max_element(m_shapes.begin(), m_shapes.end(), []
 		(auto const& firstShape, auto const& secondShape)
@@ -27,12 +36,6 @@ void CRemoteControl::PrintInfo() const
 		m_output << "The shape with the largest area:\n";
 		m_output << (*shapeWithMaxArea)->ToString() << "\n";
 
-		m_output << "|SHAPES|\n";
-		for (auto const& shape : m_shapes)
-		{
-			m_output << ">" << shape->ToString() << "\n";
-
-		}
 
 		auto shapeWithMinPerimeter = std::min_element(m_shapes.begin(), m_shapes.end(), []
 		(auto const& firstShape, auto const& secondShape)
@@ -65,10 +68,29 @@ bool CRemoteControl::HandleCommand()
 	return false;
 }
 
-bool CRemoteControl::CreateLine(std::istream & args)
+void CRemoteControl::CreateLine(std::istream & args)
 {
 	std::shared_ptr<CLineSegment> lineSegment;
 	args >> lineSegment;
 	m_shapes.push_back(lineSegment);
-	return true;
+}
+
+void CRemoteControl::CreateTriangle(std::istream & args)
+{
+	std::shared_ptr<CTriangle> triangle;
+	args >> triangle;
+	m_shapes.push_back(triangle);
+}
+
+void CRemoteControl::CreateRectangle(std::istream & args)
+{
+	std::shared_ptr<CRectangle> rectangle;
+	args >> rectangle;
+	m_shapes.push_back(rectangle);
+}
+void CRemoteControl::CreateCircle(std::istream & args)
+{
+	std::shared_ptr<CCircle> circle;
+	args >> circle;
+	m_shapes.push_back(circle);
 }

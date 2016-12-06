@@ -47,3 +47,22 @@ void CCircle::AppendProperties(std::ostream & strm) const
 	strm << "  Radius = " << m_radius
 		<< "  FillColor = " << GetFillColor();
 }
+
+std::istream & operator >> (std::istream &stream, std::shared_ptr<CCircle> & circle)
+{
+	Point firstVertex = { 0, 0 };
+	double radius = 0;
+	std::string outlineColor;
+	std::string fillColor;
+	if (
+		(stream >> firstVertex) && (stream >> radius) && (stream >> outlineColor) && (stream >> fillColor)
+		)
+	{
+		circle = std::make_shared<CCircle>(firstVertex, radius, fillColor, outlineColor);
+	}
+	else
+	{
+		stream.setstate(std::ios_base::failbit | stream.rdstate());
+	}
+	return stream;
+}

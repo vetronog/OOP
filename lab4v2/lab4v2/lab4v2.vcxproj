@@ -163,7 +163,7 @@
     <ClCompile Include="lab4v2.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Revtangle.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SolidShape.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

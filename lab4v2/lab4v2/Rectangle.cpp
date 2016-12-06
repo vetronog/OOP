@@ -60,3 +60,23 @@ void CRectangle::AppendProperties(std::ostream & strm) const
 		<< "  Height = " << m_height
 		<< "  FillColor = " << GetFillColor();
 }
+
+std::istream & operator >> (std::istream &stream, std::shared_ptr<CRectangle> & rectangle)
+{
+	Point leftPoint = { 0, 0 };
+	double width = 0;
+	double height = 0;
+	std::string outlineColor;
+	std::string fillColor;
+	if (
+		(stream >> leftPoint) && (stream >> width) && (stream >> height) && (stream >> outlineColor) && (stream >>fillColor)
+		)
+	{
+		rectangle = std::make_shared<CRectangle>(leftPoint, width, height, fillColor, outlineColor);
+	}
+	else
+	{
+		stream.setstate(std::ios_base::failbit | stream.rdstate());
+	}
+	return stream;
+}
