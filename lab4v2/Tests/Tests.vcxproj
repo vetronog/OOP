@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{664E2A9D-7D31-450F-B78A-48AA38BF0B21}</ProjectGuid>
+    <ProjectGuid>{003DD3BE-EDDD-42CC-AF5E-C891C0F98732}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>lab4v2</RootNamespace>
+    <RootNamespace>Tests</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -94,7 +94,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
+      <Command>"$(TargetPath)" --log_level=test_suite</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +127,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
+      <Command>"$(TargetPath)" --log_level=test_suite</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,33 +151,39 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Circle.h" />
-    <ClInclude Include="Control.h" />
-    <ClInclude Include="IShape.h" />
-    <ClInclude Include="LineSegment.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="SolidShape.h" />
+    <ClInclude Include="..\lab4v2\Circle.h" />
+    <ClInclude Include="..\lab4v2\Control.h" />
+    <ClInclude Include="..\lab4v2\IShape.h" />
+    <ClInclude Include="..\lab4v2\LineSegment.h" />
+    <ClInclude Include="..\lab4v2\Point.h" />
+    <ClInclude Include="..\lab4v2\Rectangle.h" />
+    <ClInclude Include="..\lab4v2\SolidShape.h" />
+    <ClInclude Include="..\lab4v2\Triangle.h" />
+    <ClInclude Include="PointTests.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="Control.cpp" />
-    <ClCompile Include="IShape.cpp" />
-    <ClCompile Include="lab4v2.cpp" />
-    <ClCompile Include="LineSegment.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="SolidShape.cpp" />
+    <ClCompile Include="..\lab4v2\Circle.cpp" />
+    <ClCompile Include="..\lab4v2\Control.cpp" />
+    <ClCompile Include="..\lab4v2\IShape.cpp" />
+    <ClCompile Include="..\lab4v2\LineSegment.cpp" />
+    <ClCompile Include="..\lab4v2\Point.cpp" />
+    <ClCompile Include="..\lab4v2\Rectangle.cpp" />
+    <ClCompile Include="..\lab4v2\SolidShape.cpp" />
+    <ClCompile Include="..\lab4v2\Triangle.cpp" />
+    <ClCompile Include="CircleTests.cpp" />
+    <ClCompile Include="LineTests.cpp" />
+    <ClCompile Include="PointTests.cpp" />
+    <ClCompile Include="RectangleTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Test1.cpp" />
+    <ClCompile Include="TriangleTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
