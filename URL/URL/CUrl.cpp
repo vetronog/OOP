@@ -7,47 +7,75 @@ using namespace std;
 CUrl::CUrl(std::string const& url)
 {
 	std::string string(url);
-	protocol = ParseProtocol(string);
-	domain = ParseDomain(string);
-	ValidateDomain(domain);
-	port = ParsePort(string);
+	m_protocol = ParseProtocol(string);
+	m_domain = ParseDomain(string);
+	ValidateDomain(m_domain);
+	m_port = ParsePort(string);
 	ValidateDocument(string);
-	document = (string[0] == '/') ? string : "/";
+	m_document = (string[0] == '/') ? string : "/";
 };
+
+CUrl::CUrl(
+	std::string const& domain,
+	std::string const& document,
+	Protocol protocol,
+	unsigned short port
+)
+	:m_domain(domain)
+	,m_document(document)
+	,m_protocol(protocol)
+	,m_port(port)
+{
+	ValidateDomain(domain);
+	ValidateDocument(document);
+}
 
 Protocol CUrl::GetProtocol() const
 {
-	return protocol;
+	return m_protocol;
 }
 
 string CUrl::GetDomain() const
 {
-	return domain;
+	return m_domain;
 }
 
-unsigned CUrl::GetPort() const
+unsigned short CUrl::GetPort() const
 {
-	return port;
+	return m_port;
 }
 
 string CUrl::GetDocument() const
 {
-	return document;
+	return m_document;
 }
 
 string CUrl::GetUrl() const
 {
-	return ProtocolToString() + "://" + PortToString() + document;
+	return ProtocolToString() + "://" + m_domain + PortToString() + m_document;
+}
+
+std::string CUrl::PortToString() const
+{
+	if ((m_port == static_cast<unsigned short>(Protocol::HTTP)) ||
+		(m_port == static_cast<unsigned short>(Protocol::HTTPS)))
+	{
+		return "";
+	}
+	else
+	{
+		return ":" + std::to_string(m_port);
+	}
 }
 
 string CUrl::ProtocolToString() const
 {
 	string result;
-	if (protocol == Protocol::HTTP)
+	if (m_protocol == Protocol::HTTP)
 	{
 		result = "http";
 	}
-	else if (protocol == Protocol::HTTPS)
+	else if (m_protocol == Protocol::HTTPS)
 	{
 		result  = "https";
 	}
@@ -67,17 +95,16 @@ Protocol CUrl::ToProtocolType(std::string const& protocol) const
 	throw CUrlParsingError(INVALID_PROTOCOL);
 }
 
-std::string CUrl::PortToString() const
+Protocol CUrl::ParseProtocol(string &urlR) const
 {
-	if ((port == static_cast<unsigned>(Protocol::HTTP)) ||
-		(port == static_cast<unsigned>(Protocol::HTTPS)))
+	auto pos = urlR.find(PROTOCOL_DELIMITER);
+	if (pos != string::npos)
 	{
-		return "";
+		auto protocol = urlR.substr(0, pos);
+		urlR = urlR.substr(pos + PROTOCOL_DELIMITER.size());
+		return ToProtocolType(protocol);
 	}
-	else
-	{
-		return std::to_string(port);
-	}
+	throw CUrlParsingError(PROTOCOL_PARSING_ERROR);
 }
 
 void CUrl::ValidateDomain(std::string const& domain) const
@@ -92,52 +119,32 @@ void CUrl::ValidateDomain(std::string const& domain) const
 	}
 }
 
-void CUrl::ValidateDocument(std::string const& document) const
+string CUrl::ParseDomain(string &urlR) const
 {
-	bool isValidDocument = document.find(" ") != std::string::npos;
-	if (isValidDocument)
+	auto pos = urlR.find(":");
+	if (pos == string::npos)
 	{
-		throw CUrlParsingError(INVALID_DOCUMENT);
+		pos = urlR.find("/");
 	}
-}
-
-Protocol CUrl::ParseProtocol(string &url) const
-{
-	auto pos = url.find(PROTOCOL_DELIMITER);
-	if (pos != string::npos)
-	{
-		auto protocol = url.substr(0, pos);
-		url = url.substr(pos + PROTOCOL_DELIMITER.size());
-		return ToProtocolType(protocol);
-	}
-	throw CUrlParsingError(PROTOCOL_PARSING_ERROR);
-}
-
-string CUrl::ParseDomain(string &url) const
-{
-	auto pos = url.find(":");
-	if (pos = string::npos)
-	{
-		pos = url.find("/");
-	}
-	auto domain = url.substr(0, pos);
+	auto domain = urlR.substr(0, pos);
 	if (domain.empty())
 	{
 		throw CUrlParsingError(DOMAIN_PARSING_ERROR);
 	}
-	url = url.substr(domain.size());
-	
+	urlR = urlR.substr(domain.size());
+
 	return domain;
 }
 
-unsigned CUrl::ParsePort(string & url) const
+
+unsigned short CUrl::ParsePort(string & urlR) const
 {
-	unsigned port;
-	if (url[0] == ':')
+	unsigned short port;
+	if (urlR[0] == ':')
 	{
-		auto endPos = url.find('/');
-		auto portStr = url.substr(1, endPos - 1);
-		url = url.substr(portStr.size() + 1, url.size() - 1);
+		auto endPos = urlR.find('/');
+		auto portStr = urlR.substr(1, endPos - 1);
+		urlR = urlR.substr(portStr.size() + 1, urlR.size() - 1);
 		if (portStr.empty())
 			throw CUrlParsingError(PORT_PARSING_ERROR);
 		try
@@ -151,7 +158,20 @@ unsigned CUrl::ParsePort(string & url) const
 	}
 	else
 	{
-		port = static_cast<unsigned>(protocol);
+		port = static_cast<unsigned short>(m_protocol);
 	}
 	return port;
 }
+
+
+void CUrl::ValidateDocument(std::string const& document) const
+{
+	bool isValidDocument = document.find(" ") != std::string::npos;
+	if (isValidDocument)
+	{
+		throw CUrlParsingError(INVALID_DOCUMENT);
+	}
+}
+
+
+

@@ -24,13 +24,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\ParsingErrs.h">
+    <ClInclude Include="ParsingErrs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\CUrl.h">
+    <ClInclude Include="Parametres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\Parametres.h">
+    <ClInclude Include="CUrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,19 +38,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="URLTests.cpp">
+    <ClCompile Include="ParsingErrs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\URL\ParsingErrs.cpp">
+    <ClCompile Include="Parametres.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\URL\CUrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\URL\Parametres.cpp">
+    <ClCompile Include="CUrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -24,13 +24,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\ParsingErrs.h">
+    <ClInclude Include="..\ConsoleApplication1\CUrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\CUrl.h">
+    <ClInclude Include="..\ConsoleApplication1\Parametres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\URL\Parametres.h">
+    <ClInclude Include="..\ConsoleApplication1\ParsingErrs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,19 +38,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="lab6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="URLTests.cpp">
+    <ClCompile Include="..\ConsoleApplication1\CUrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\URL\ParsingErrs.cpp">
+    <ClCompile Include="..\ConsoleApplication1\Parametres.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\URL\CUrl.cpp">
+    <ClCompile Include="..\ConsoleApplication1\ParsingErrs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\URL\Parametres.cpp">
+    <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
