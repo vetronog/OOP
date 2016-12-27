@@ -24,14 +24,14 @@ public:
 	CMyStack(const CMyStack &other)
 	{
 		std::shared_ptr<Node> tmp = other.s_top;
-		std::shared_ptr<Node> end = std::make_shared<Node>(tmp->value, nullptr);
-		s_top = end;
+		std::shared_ptr<Node> current_point = std::make_shared<Node>(tmp->value, nullptr);
+		s_top = current_point;
 
 		tmp = tmp->next;
 		while (tmp != nullptr)
 		{
-			end->next = std::make_shared<Node>(tmp->value, nullptr);
-			end = end->next;
+			current_point->next = std::make_shared<Node>(tmp->value, nullptr);
+			current_point = current_point->next;
 
 			tmp = tmp->next;
 		}
@@ -94,13 +94,13 @@ public:
 		if (std::addressof(assigns_stack) != this)
 		{
 			std::shared_ptr<Node> tmp = assigns_stack.s_top;
-			std::shared_ptr<Node> end = std::make_shared<Node>(tmp->value, nullptr);
-			s_top = end;
+			std::shared_ptr<Node> current_point = std::make_shared<Node>(tmp->value, nullptr);
+			s_top = current_point;
 			tmp = tmp->next;
 			while (tmp != nullptr)
 			{
-				end->next = std::make_shared<Node>(tmp->value, nullptr);
-				end = end->next;
+				current_point->next = std::make_shared<Node>(tmp->value, nullptr);
+				current_point = current_point->next;
 				tmp = tmp->next;
 			}
 			s_size = assigns_stack.GetSize();
