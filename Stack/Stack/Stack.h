@@ -70,12 +70,12 @@ public:
 		return s_top->value;
 	};
 
-	size_t GetStackSize()
+	size_t GetStackSize() const
 	{
 		return s_size;
 	};
 
-	bool IsStackEmpty()
+	bool IsStackEmpty() const
 	{
 		return s_size == 0;
 	};
@@ -112,15 +112,15 @@ public:
 	{
 		if (std::addressof(copied_stack) != this)
 		{
-			m_top = copied_stack.m_top;
-			m_size = copied_stack.m_size;
-			copied_stack.m_top = nullptr;
-			copied_stack.m_size = 0;
+			s_top = copied_stack.s_top;
+			s_size = copied_stack.s_size;
+			copied_stack.s_top = nullptr;
+			copied_stack.s_size = 0;
 		}
 		return *this;
 	};
 
 private:
-	std::shared_ptr<Node> m_top;
-	size_t m_size;
+	std::shared_ptr<Node> s_top;
+	size_t s_size;
 };
