@@ -14,7 +14,7 @@ public:
 		std::string const& domain,
 		std::string const& document,
 		Protocol protocol = Protocol::HTTP,
-		unsigned short port = static_cast< unsigned>(Protocol::HTTP)
+		unsigned short port = static_cast<unsigned>(Protocol::HTTP)
 	);
 	std::string GetUrl() const;
 	Protocol GetProtocol() const;

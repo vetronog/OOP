@@ -24,8 +24,9 @@ CUrl::CUrl(
 	:m_domain(domain)
 	,m_document(document)
 	,m_protocol(protocol)
-	,m_port(port)
+	
 {
+	
 	ValidateDomain(domain);
 	ValidateDocument(document);
 }
@@ -155,6 +156,10 @@ unsigned short CUrl::ParsePort(string & urlR) const
 		catch (boost::bad_lexical_cast const& error)
 		{
 			throw CUrlParsingError(error.what());
+		}
+		if (port == 0)
+		{
+			throw CUrlParsingError(PORT_PARSING_ERROR);
 		}
 	}
 	else

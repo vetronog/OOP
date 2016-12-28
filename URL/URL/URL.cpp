@@ -16,6 +16,8 @@ void PrintInfo(CUrl const& url)
 
 int main()
 {
+	CUrl url1("ya.ru", "/doc1", Protocol::HTTPS);
+	PrintInfo(url1);
 	string url;
 	while (getline(cin, url))
 	{

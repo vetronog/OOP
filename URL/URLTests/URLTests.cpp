@@ -90,6 +90,8 @@ BOOST_AUTO_TEST_SUITE(CURLTest)
 			BOOST_CHECK(CUrl("https://vk.com/im?sel=77578425").GetUrl() == "https://vk.com/im?sel=77578425");
 			BOOST_CHECK(CUrl("https://ficbook.net/").GetUrl() == "https://ficbook.net/");
 			BOOST_CHECK(CUrl("HTTPS://ficbook.net/").GetUrl() == "https://ficbook.net/");
+			BOOST_CHECK(CUrl("hTtPs://ficbook.net/").GetUrl() == "https://ficbook.net/");
+			BOOST_CHECK(CUrl("HtTpS://ficbook.net/").GetUrl() == "https://ficbook.net/");
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 		
@@ -124,6 +126,19 @@ BOOST_AUTO_TEST_SUITE(CURLTest)
 			BOOST_CHECK_THROW(CUrl url("http://adet.by:"), CUrlParsingError);
 			BOOST_CHECK_THROW(CUrl url("http://adet.by:/"), CUrlParsingError);
 			BOOST_CHECK_THROW(CUrl url("http://tyt.by:63aa"), CUrlParsingError);
+		}
+
+		BOOST_AUTO_TEST_CASE(invalid_domain)
+		{
+			BOOST_CHECK_THROW(CUrl url("http://ty  t.by/doc doc"), CUrlParsingError);
+			BOOST_CHECK_THROW(CUrl url("http://ty/t.by/dct    fdsg"), CUrlParsingError);
+			BOOST_CHECK_THROW(CUrl url("http://ty//t.by/dct    fdsg"), CUrlParsingError);
+		}
+
+		BOOST_AUTO_TEST_CASE(invalid_document)
+		{
+			BOOST_CHECK_THROW(CUrl url("http://tyt.by/doc doc"), CUrlParsingError);
+			BOOST_CHECK_THROW(CUrl url("http://tyt.by/dct    fdsg"), CUrlParsingError);
 		}
 		
 	BOOST_AUTO_TEST_SUITE_END()
