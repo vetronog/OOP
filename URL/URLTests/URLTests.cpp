@@ -89,6 +89,7 @@ BOOST_AUTO_TEST_SUITE(CURLTest)
 		{
 			BOOST_CHECK(CUrl("https://vk.com/im?sel=77578425").GetUrl() == "https://vk.com/im?sel=77578425");
 			BOOST_CHECK(CUrl("https://ficbook.net/").GetUrl() == "https://ficbook.net/");
+			BOOST_CHECK(CUrl("HTTPS://ficbook.net/").GetUrl() == "https://ficbook.net/");
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 		
@@ -118,6 +119,8 @@ BOOST_AUTO_TEST_SUITE(CURLTest)
 		
 		BOOST_AUTO_TEST_CASE(invalid_port)
 		{
+
+			BOOST_CHECK_THROW(CUrl url("http://adet.by:0"), CUrlParsingError);
 			BOOST_CHECK_THROW(CUrl url("http://adet.by:"), CUrlParsingError);
 			BOOST_CHECK_THROW(CUrl url("http://adet.by:/"), CUrlParsingError);
 			BOOST_CHECK_THROW(CUrl url("http://tyt.by:63aa"), CUrlParsingError);

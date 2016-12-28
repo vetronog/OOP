@@ -84,11 +84,11 @@ string CUrl::ProtocolToString() const
 
 Protocol CUrl::ToProtocolType(std::string const& protocol) const
 {
-	if ((protocol == "http") || (protocol == "HTTP"))
+	if (protocol == "http")
 	{
 		return Protocol::HTTP;
 	}
-	if ((protocol == "https") || (protocol == "HTTP"))
+	if (protocol == "https")
 	{
 		return Protocol::HTTPS;
 	}
@@ -101,6 +101,7 @@ Protocol CUrl::ParseProtocol(string &urlR) const
 	if (pos != string::npos)
 	{
 		auto protocol = urlR.substr(0, pos);
+		std::transform(protocol.begin(), protocol.end(), protocol.begin(), tolower);
 		urlR = urlR.substr(pos + PROTOCOL_DELIMITER.size());
 		return ToProtocolType(protocol);
 	}
@@ -149,7 +150,7 @@ unsigned short CUrl::ParsePort(string & urlR) const
 			throw CUrlParsingError(PORT_PARSING_ERROR);
 		try
 		{
-			port = boost::lexical_cast<unsigned short>(portStr);
+			port = (boost::lexical_cast<unsigned short>(portStr));
 		}
 		catch (boost::bad_lexical_cast const& error)
 		{
