@@ -7,6 +7,7 @@ using namespace std;
 
 void PrintInfo(CUrl const& url)
 {
+	cout << "URL > " << url.GetUrl() << "\n";
 	cout << "Protocol > " << url.ProtocolToString() << "\n";
 	cout << "Domain > " << url.GetDomain() << "\n";
 	cout << "Port > " << url.GetPort() << "\n";

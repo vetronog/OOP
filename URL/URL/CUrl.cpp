@@ -84,11 +84,11 @@ string CUrl::ProtocolToString() const
 
 Protocol CUrl::ToProtocolType(std::string const& protocol) const
 {
-	if (protocol == "http")
+	if ((protocol == "http") || (protocol == "HTTP"))
 	{
 		return Protocol::HTTP;
 	}
-	if (protocol == "https")
+	if ((protocol == "https") || (protocol == "HTTP"))
 	{
 		return Protocol::HTTPS;
 	}
