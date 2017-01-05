@@ -1,9 +1,9 @@
 |SHAPES|
 >Line:   S = 0  P = 100  ColorOutline = ff0000
->Rectangle:   S = 10000  P = 400  ColorOutline = 00ff00  Width = 100  Height = 100  FillColor = ff0000
+>Rectangle:   S = -10000  P = 0  ColorOutline = 00ff00  Width = -100  Height = 100  FillColor = ff0000
 >Triangle:   S = 5000  P = 341.421  ColorOutline = 0000ff  FillColor = ff0000
 >Circle:   S = 7853.98  P = 314.159  ColorOutline = f0f0f0  Radius = 50  FillColor = 0f0f0f
 The shape with the largest area:
-Rectangle:   S = 10000  P = 400  ColorOutline = 00ff00  Width = 100  Height = 100  FillColor = ff0000
+Circle:   S = 7853.98  P = 314.159  ColorOutline = f0f0f0  Radius = 50  FillColor = 0f0f0f
 Shape with minimum perimeter:
-Line:   S = 0  P = 100  ColorOutline = ff0000
+Rectangle:   S = -10000  P = 0  ColorOutline = 00ff00  Width = -100  Height = 100  FillColor = ff0000
