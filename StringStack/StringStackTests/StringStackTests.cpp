@@ -13,14 +13,6 @@ BOOST_FIXTURE_TEST_SUITE(StringStack, StringStack_)
 			BOOST_CHECK_EQUAL(stack.IsStackEmpty(), true);
 			BOOST_CHECK_EQUAL(stack.GetStackSize(), 0);
 		}
-	
-	BOOST_AUTO_TEST_CASE(can_be_constructed_from_other_stack)
-	{
-		stack.Push("abcdef");
-		stack.Push("qwerty");
-		CStringStack stack2(stack);
-		BOOST_CHECK_EQUAL(stack2.GetString(), stack.GetString());
-	}
 
 	BOOST_AUTO_TEST_CASE(can_add_element)
 	{
@@ -53,7 +45,7 @@ BOOST_FIXTURE_TEST_SUITE(StringStack, StringStack_)
 		BOOST_CHECK_EQUAL(stack.GetString(), "abcdej");
 	}
 
-	BOOST_AUTO_TEST_CASE(first_stack_is_independent_of_its_copies)
+	BOOST_AUTO_TEST_CASE(first_stack_is_independent)
 	{
 		stack.Push("abc");
 		stack.Push("qwerty");
@@ -92,6 +84,14 @@ BOOST_FIXTURE_TEST_SUITE(StringStack, StringStack_)
 		CStringStack stack2;
 		stack2 = CStringStack();
 		BOOST_CHECK(stack.IsStackEmpty());
+	}
+
+	BOOST_AUTO_TEST_CASE(can_be_constructed_from_other_stack)
+	{
+		stack.Push("abcdef");
+		stack.Push("qwerty");
+		CStringStack stack2(stack);
+		BOOST_CHECK_EQUAL(stack2.GetString(), stack.GetString());
 	}
 
 	BOOST_AUTO_TEST_SUITE(throw_exception_if)
